@@ -13,10 +13,43 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-function transform(/* arr */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function transform(arr) {
+  if (!Array.isArray(arr)) {
+		throw new Error("'arr' parameter must be an instance of the Array!");
+	}
+ let copyArr = JSON.parse(JSON.stringify(arr));
+  let result = [];
+  
+ for(let i = 0;i< copyArr.length;i++){
+     if(copyArr[i] === '--discard-next'){
+       if(copyArr[i+2] === '--discard-prev' || copyArr[i+2] === '--double-prev'){
+         copyArr.splice(i, 3);
+       }
+       else if(i !== copyArr.length -1){
+         copyArr.splice(i, 2);}
+         else if(i === copyArr.length - 1){
+           copyArr.splice(i, 1);
+         }
+     }else if(copyArr[i] === '--discard-prev'){
+       if(i>0){
+         copyArr.splice(i-1, 2);}else if(i === 0){
+         copyArr.splice(i, 1);}
+     }else if(copyArr[i] === '--double-next'){
+       if(i == copyArr.length - 1){
+        copyArr.splice(i, 1);}
+       else if(i < copyArr.length - 1){
+        copyArr[i] = copyArr[i+1];
+               }
+     }else if(copyArr[i] == '--double-prev'){
+       if(i != 0 && copyArr[i - 1] !=  undefined){
+        copyArr[i] = copyArr[i-1];
+       }else{
+         copyArr.splice(i, 1);  
+       }
+     }
+ } return copyArr;
 }
+
 
 module.exports = {
   transform
