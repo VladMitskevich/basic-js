@@ -16,14 +16,16 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function repeater( str, options) {
-  str = str.toString();
-  options.addition = options.addition.toString(); 
-  if(options.additionRepeatTimes > 1){
-  let additionStr = options.additionSeparator + options.addition; 
-  ;}
-  let newStr = str + additionStr
+                throw new NotImplementedError('Not implemented');
+                // remove line with error and write your code here
+                // str = str.toString();
+                // options.addition = options.addition.toString(); 
+                // if(options.additionRepeatTimes > 1){
+                // let additionStr = options.additionSeparator + options.addition; 
+                // ;}
+                // let newStr = str + additionStr
 }
-
+  
 module.exports = {
-  repeater
+                repeater
 };
